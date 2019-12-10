@@ -24,7 +24,7 @@ public enum File {
     public List<String> importFile() {
         switch (this) {
             case DAY1_1: return importFileByLines();
-            case DAY2_1: return importFileSplitByComma();
+            case DAY2_1: return importFileSplitByRegex(",");
             default: throw new RuntimeException("file does not exist");
         }
     }
@@ -40,18 +40,15 @@ public enum File {
         return lines;
     }
 
-    private List<String> importFileSplitByComma() {
+    private List<String> importFileSplitByRegex(String regex) {
         List<String> line = new ArrayList<>();
         try {
             Path path = Paths.get(file);
-            line = Arrays.asList(Files.readString(path).split(","));
+            line = Arrays.asList(Files.newBufferedReader(path).readLine().split(regex));
         }catch(IOException e) {
             e.printStackTrace();
         }
         return line;
     }
-
-
-
 
 }

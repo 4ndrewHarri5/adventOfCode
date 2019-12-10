@@ -27,6 +27,17 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.spotify.dataenum</groupId>
+            <artifactId>dataenum</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.spotify.dataenum</groupId>
+            <artifactId>dataenum-processor</artifactId>
+            <version>1.4.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 </project>
