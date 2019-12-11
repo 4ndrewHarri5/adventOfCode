@@ -10,8 +10,8 @@ public abstract class Result{
 
     abstract public Result result();
 
-    public static Result number(int newNumber, int indexToStore, int newIndex) {
-        return new ResultNumber(newNumber, indexToStore, newIndex);
+    public static Result index(int newIndex) {
+        return new ResultNextIndex(newIndex);
     }
 
     public static Result terminate() {
@@ -21,10 +21,5 @@ public abstract class Result{
     public static Result invalid() {
         return new ResultInvalid();
     }
-
-
-    /*public void perform(Action action) {
-        action.perform(this);
-    }*/
 
 }

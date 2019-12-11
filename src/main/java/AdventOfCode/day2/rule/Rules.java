@@ -2,7 +2,6 @@ package AdventOfCode.day2.rule;
 
 import AdventOfCode.day2.Opcode;
 import AdventOfCode.day2.result.Result;
-import AdventOfCode.day2.util.ListChecker;
 
 import java.util.List;
 
@@ -10,23 +9,25 @@ public enum Rules implements Rule {
 
     ADD((currentIndex, code) ->  {
         try{
-            Integer a = code.get(code.get(currentIndex+1));
-            Integer b = code.get(code.get(currentIndex+2));
-            Integer indexToChange = code.get(currentIndex+3);
-            return Result.number(a+b, indexToChange, currentIndex+4);
+            Integer operation = code.get(code.get(currentIndex+1)) + code.get(code.get(currentIndex+2));
+            Integer indexToStore = code.get(currentIndex+3);
+            Integer newIndex = currentIndex+4;
+            code.set(indexToStore, operation);
+            return Result.index(newIndex);
         }catch (Exception e) {
-            return Result.invalid();
+            return Result.terminate();
         }
     }),
 
     MULTIPLY((currentIndex, code) -> {
         try{
-            Integer a = code.get(code.get(currentIndex+1));
-            Integer b = code.get(code.get(currentIndex+2));
-            Integer indexToChange = code.get(currentIndex+3);
-            return Result.number(a*b, indexToChange, currentIndex+4);
+            Integer operation = code.get(code.get(currentIndex+1)) * code.get(code.get(currentIndex+2));
+            Integer indexToStore = code.get(currentIndex+3);
+            Integer newIndex = currentIndex+4;
+            code.set(indexToStore, operation);
+            return Result.index(newIndex);
         }catch (Exception e) {
-            return Result.invalid();
+            return Result.terminate();
         }
     }),
 

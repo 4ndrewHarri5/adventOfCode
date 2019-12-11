@@ -3,51 +3,36 @@ package AdventOfCode.day2;
 import AdventOfCode.File;
 import AdventOfCode.Runner;
 import AdventOfCode.day2.result.Result;
-import AdventOfCode.day2.result.ResultNumber;
+import AdventOfCode.day2.result.ResultNextIndex;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class IntCode implements Runner {
 
     private List<Integer> code;
+    private int nextOpcodeIndex = 0;
 
     public IntCode() {
-        code = new ArrayList<>();
-        code = File.DAY2_1
-                .importFile()
-                .stream()
-                .map(Integer::valueOf)
-                .collect(Collectors.toList());
-
+        reset();
     }
 
     private void runIntCode() {
-        final int[] nextOpcodeIndex = {0};
-        loopCode: while(nextOpcodeIndex[0] < code.size()) {
-            Integer nextOpcode = code.get(nextOpcodeIndex[0]);
-            Result opcodeResult = Opcode.set(nextOpcode).applyRule().with(nextOpcodeIndex[0], code).result();
-            switch (opcodeResult.getType()) {
-                case NUMBER: {
-                    ResultNumber resultNumber = (ResultNumber) opcodeResult;
-                    code.set(resultNumber.getIndexToStore(), resultNumber.getNumber());
-                    nextOpcodeIndex[0] = resultNumber.getNewIndex();
-                    break;
-                }
-                case NEXTINDEX:
-                    break loopCode;
-                case TERMINATE: {
-                    System.out.println("lets stop");
-                    break loopCode;
-                }
-                case INVALID: {
-                    System.out.println("invalid");
-                    break loopCode;
-                }
+        loopCode: while(nextOpcodeIndex < code.size()) {
+            Integer nextOpcode = code.get(nextOpcodeIndex);
+            Result result = Opcode.set(nextOpcode).applyRule().with(nextOpcodeIndex, code).result();
+            switch (result.getType()) {
+                case NEXTINDEX: nextOpcodeIndex = ((ResultNextIndex) result).getNextIndex(); break;
+                case INVALID: nextOpcodeIndex++; break;
+                case TERMINATE: break loopCode;
             }
         }
+    }
+
+    private void reset() {
+        code = new ArrayList<>();
+        code = File.DAY2_1.importFile().stream().map(Integer::valueOf).collect(Collectors.toList());
     }
 
     @Override

@@ -10,7 +10,7 @@ public class ResultNextIndex extends Result {
         this.nextIndex = nextIndex;
     }
 
-    public int getNumber() {
+    public int getNextIndex() {
         return nextIndex;
     }
 

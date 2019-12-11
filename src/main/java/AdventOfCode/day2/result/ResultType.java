@@ -2,7 +2,7 @@ package AdventOfCode.day2.result;
 
 public enum ResultType {
 
-    NUMBER,
+    //NUMBER,
     NEXTINDEX,
     TERMINATE,
     INVALID;
