@@ -13,7 +13,8 @@ import java.util.stream.Stream;
 public enum File {
 
     DAY1_1("/Users/harrisa/dev/learning/adventOfCode/adventOfCode/inputFiles/input_day1.txt"),
-    DAY2_1("/Users/harrisa/dev/learning/adventOfCode/adventOfCode/inputFiles/input_day2_1.txt");
+    DAY2_1("/Users/harrisa/dev/learning/adventOfCode/adventOfCode/inputFiles/input_day2_1.txt"),
+    DAY2_2("/Users/harrisa/dev/learning/adventOfCode/adventOfCode/inputFiles/input_day2_1_Johanna.txt");
 
     String file;
 
@@ -24,7 +25,8 @@ public enum File {
     public List<String> importFile() {
         switch (this) {
             case DAY1_1: return importFileByLines();
-            case DAY2_1: return importFileSplitByRegex(",");
+            case DAY2_1:
+            case DAY2_2: return importFileSplitByRegex(",");
             default: throw new RuntimeException("file does not exist");
         }
     }

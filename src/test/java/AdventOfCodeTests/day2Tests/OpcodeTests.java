@@ -1,6 +1,10 @@
 package AdventOfCodeTests.day2Tests;
 
+import AdventOfCode.File;
+import AdventOfCode.day2.IntCode;
 import AdventOfCode.day2.Opcode;
+import AdventOfCode.day2.input.InputPairs;
+import AdventOfCode.day2.input.Pairs;
 import AdventOfCode.day2.result.Result;
 import AdventOfCode.day2.result.ResultType;
 import AdventOfCode.day2.rule.Rule;
@@ -10,6 +14,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OpcodeTests {
 
@@ -129,4 +134,54 @@ public class OpcodeTests {
         //Assert
         Assertions.assertThat(code).isEqualTo(Arrays.asList(2,1,1,0));
     }
+
+    @Test
+    public void whenOpcodeIsRunWithInputThenResultIs_3101844() {
+        //Arrange
+        List<Integer> code = File.DAY2_1.importFile().stream().map(Integer::valueOf).collect(Collectors.toList());
+        code.set(1, 12);
+        code.set(2, 2);
+        //Act
+        IntCode intCode = new IntCode(code);
+        intCode.computeCode();
+        //Assert
+        Assertions.assertThat(code.get(0)).isEqualTo(3101844);
+    }
+
+    @Test
+    public void whenRunningPart2AndCodeIsOtherInputThenResultIs2347() {
+        List<Integer> code = File.DAY2_2.importFile().stream().map(Integer::valueOf).collect(Collectors.toList());
+        String answer = "";
+        IntCode intCode = new IntCode(code);
+        Pairs pairs = intCode.getInputParametersForOutputWithAddress(19690720, 0);
+        switch (pairs.getType()) {
+            case VALID:
+                InputPairs inputPairs = (InputPairs) pairs;
+                answer = (100*inputPairs.getNoun() + inputPairs.getVerb()) + "";
+                break;
+            case INVALID:
+            default: answer = "";
+        }
+
+        Assertions.assertThat(answer).isEqualTo("2347");
+    }
+
+    @Test
+    public void whenRunningPart2AndCodeIsNormalInputThenResultIs8478() {
+        List<Integer> code = File.DAY2_1.importFile().stream().map(Integer::valueOf).collect(Collectors.toList());
+        String answer = "";
+        IntCode intCode = new IntCode(code);
+        Pairs pairs = intCode.getInputParametersForOutputWithAddress(19690720, 0);
+        switch (pairs.getType()) {
+            case VALID:
+                InputPairs inputPairs = (InputPairs) pairs;
+                answer = (100*inputPairs.getNoun() + inputPairs.getVerb()) + "";
+                break;
+            case INVALID:
+            default: answer = "";
+        }
+
+        Assertions.assertThat(answer).isEqualTo("8478");
+    }
+
 }
