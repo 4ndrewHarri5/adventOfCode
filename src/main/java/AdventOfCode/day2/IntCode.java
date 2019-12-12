@@ -63,7 +63,6 @@ public class IntCode implements Runner {
 
     @Override
     public String run() {
-
         if (Feature.DAY2_1) {
             computeCode();
             return code.get(0).toString();
@@ -77,8 +76,7 @@ public class IntCode implements Runner {
                 default:
                     return "Could not find output";
             }
-        }else{
-            return "";
         }
+        return "";
     }
 }
