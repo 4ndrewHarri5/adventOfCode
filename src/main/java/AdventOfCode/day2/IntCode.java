@@ -24,9 +24,9 @@ public class IntCode implements Runner {
         code = initialCode;
     }
 
-    public IntCode(List<Integer> initial) {
-        initialCode = initial;
-        code = initial;
+    public IntCode(List<Integer> code) {
+        initialCode = code;
+        this.code = code;
     }
 
     public void computeCode() {
