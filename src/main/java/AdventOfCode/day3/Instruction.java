@@ -25,7 +25,7 @@ public class Instruction {
             instructionDirection = InstructionDirection.RIGHT;
         }else if (instructionString.startsWith("L")) {
             instructionPrefix = "L";
-            instructionDirection = InstructionDirection.DOWN;
+            instructionDirection = InstructionDirection.LEFT;
         }else if (instructionString.startsWith("U")) {
             instructionPrefix = "U";
             instructionDirection = InstructionDirection.UP;
