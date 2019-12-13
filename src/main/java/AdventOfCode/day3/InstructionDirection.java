@@ -5,6 +5,7 @@ public enum InstructionDirection {
     RIGHT,
     LEFT,
     UP,
-    DOWN
+    DOWN,
+    NOT_SET
 
 }
